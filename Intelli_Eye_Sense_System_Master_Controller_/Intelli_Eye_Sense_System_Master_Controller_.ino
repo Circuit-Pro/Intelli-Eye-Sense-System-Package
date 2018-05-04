@@ -23,7 +23,7 @@ unsigned long previousMillis = 0;
 const long interval = 15; 
 
 const int analogIn = A0;
-int mVperAmp = 185; // use 100 for 20A Module and 66 for 30A Module
+int mVperAmp = 66; // use 100 for 20A Module and 66 for 30A Module
 int RawValue= 0;
 int ACSoffset = 2500; 
 double Voltage = 0;
@@ -73,6 +73,11 @@ int IVSL = 0;
 
 int D = 0;
 int B = 0;
+
+// MATH int
+int IPR = 0;
+int MPH = 0;
+int BC = 0;
  
  volatile byte half_revolutions;
  unsigned int rpm;
@@ -209,8 +214,10 @@ attachInterrupt(0, rpm_fun, RISING);
    half_revolutions = 0;
    rpm = 0;
    timeold = 0;
+
 // Breaking PID
-Input = half_revolutions;
+
+Input = MPH;
   Setpoint = IVSC;
   //turn the PID on
   BR.SetMode(AUTOMATIC);
@@ -220,7 +227,14 @@ Input = half_revolutions;
 byte TSP = 0; // Targeted Steering Position from F.C.S.P
 byte ASP = 0; // Actual Sterring Position
 
+
+
 void loop() {
+  //MATH
+  IPR = (84.823 * rpm);
+  MPH = (IPR * 60);
+  BC = (IVSC - MPH);
+  
   D = Wire.read();
    ASP = analogRead(SP);
    
