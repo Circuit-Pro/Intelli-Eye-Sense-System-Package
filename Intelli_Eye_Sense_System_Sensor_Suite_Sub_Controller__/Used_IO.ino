@@ -2,4 +2,5 @@
  * D3 - LidarLite-V3 Echo
  * D4 - Ultrasonic Trigger
  * D5 - Ultrasonic Echo
+ * D6 - Rain Sensor
  */

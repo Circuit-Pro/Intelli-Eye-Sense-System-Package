@@ -11,7 +11,7 @@
  * 11119 - Degraded Fusion Data Expect errors Sensor 9 only
  * 00100 - Degraded Fusion Data Expect errors other sensors
  * 
- * 
+ * 10110 - US sensor data No LD sensor data cause obstroction or bad operating enviorment.
  * 
  */
 
