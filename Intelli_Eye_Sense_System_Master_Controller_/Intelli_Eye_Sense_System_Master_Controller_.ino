@@ -85,14 +85,19 @@ int BC = 0;
 
   
 void setup() {
-Wire.begin(8);
+  //Dash Display Setup
 Serial.begin(115200);
+  
+Wire.begin(8);
 pinMode(ERR, OUTPUT);
 pinMode(BPER, OUTPUT);
 D = Wire.read();
 
   // Begin initialization of Sensors and System Check
-
+if Serial.available(){
+  Serial.println(00x00); //Tell Display System Is Startup
+  }
+  
   Wire.beginTransmission(9);  // transmit to device #2
   Wire.write(00000);          //Sends startup request and check
   Wire.endTransmission();     // stop transmitting
@@ -103,8 +108,8 @@ D = Wire.read();
     }
     else {
       digitalWrite(ERR, HIGH);
-      Serial.println("ERROR SENSOR 9 FWRP FAULT!");
-      Serial.print(2);
+      Serial.println("ERROR SENSOR FWRP FAULT!");
+      Serial.print(0x2);
     }
   delay(10);
   
@@ -119,7 +124,7 @@ D = Wire.read();
     else {
       digitalWrite(ERR, HIGH);
     Serial.println("ERROR SENSOR FWCP FAULT!");
-    Serial.print(3);
+    Serial.print(0x3);
     }
     delay(10);
   
@@ -134,7 +139,7 @@ D = Wire.read();
     else {
       digitalWrite(ERR, HIGH);
     Serial.println("ERROR SENSOR FWLP FAULT!");
-    Serial.print(4);
+    Serial.print(0x4);
     } 
   delay(10);
   
@@ -149,7 +154,7 @@ D = Wire.read();
      else {
       digitalWrite(ERR, HIGH);
     Serial.println("ERROR SENSOR LSSP FAULT!");
-    Serial.print(5);
+    Serial.print(0x5);
     }
   delay(10);
   
@@ -163,7 +168,7 @@ D = Wire.read();
  else {
       digitalWrite(ERR, HIGH);
     Serial.println("ERROR SENSOR BLSP FAULT!");
-    Serial.print(6);
+    Serial.print(0x6);
     }  delay(10);
   
   Wire.beginTransmission(14);  // transmit to device #7
@@ -177,7 +182,7 @@ D = Wire.read();
  else {
       digitalWrite(ERR, HIGH);
     Serial.println("ERROR SENSOR BCSP FAULT!");
-    Serial.print(7);
+    Serial.print(0x7);
     }  delay(10);
   
   Wire.beginTransmission(15);  // transmit to device #8
@@ -191,7 +196,7 @@ D = Wire.read();
  else {
       digitalWrite(ERR, HIGH);
     Serial.println("ERROR SENSOR BRSP FAULT!");
-    Serial.print(8);
+    Serial.print(0x8);
     }  delay(10);
   
   Wire.beginTransmission(16);  // transmit to device #9
@@ -205,10 +210,12 @@ D = Wire.read();
  else {
       digitalWrite(ERR, HIGH);
     Serial.println("ERROR SENSOR RSSP FAULT!");
-    Serial.print(9);
+    Serial.print(0x9);
     }    
   delay(10);
 STSC();
+
+Serial.println(11x11); //Tell Display System Check OK
 
 attachInterrupt(0, rpm_fun, RISING);
    half_revolutions = 0;
@@ -218,7 +225,7 @@ attachInterrupt(0, rpm_fun, RISING);
 // Breaking PID
 
 Input = MPH;
-  Setpoint = IVSC;
+  Setpoint = BC;
   //turn the PID on
   BR.SetMode(AUTOMATIC);
 }
@@ -244,7 +251,8 @@ void loop() {
      rpm = 30*1000/(millis() - timeold)*half_revolutions;
      timeold = millis();
      half_revolutions = 0;
-     Serial.println(rpm,DEC);  
+     Serial.println(0x22);//Tell Display sending speed data 
+     Serial.println(MPH,DEC);  
    }
 
     COMS();

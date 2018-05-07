@@ -30,7 +30,7 @@ int UD = 0;
 int FD = 0;
 
 int FDF = UD - FD;
-int RSD = 0;
+
 
 unsigned long pulseWidth;
 
@@ -183,13 +183,6 @@ else{
         Wire.write(00110 + ID);
         Wire.write(FD);
         Wire.endTransmission();
-        }
-        if (RS == LOW){
-        Wire.beginTransmission(8);
-        Wire.write(10110 + ID);
-        Wire.write(FD);
-        Wire.endTransmission();
-          }
       }
     }
   }

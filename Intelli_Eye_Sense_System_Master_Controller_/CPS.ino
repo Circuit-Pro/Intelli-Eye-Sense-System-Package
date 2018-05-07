@@ -33,17 +33,14 @@ void CPS()
     
     // Prevention System
     if(IVSR >= 2.23){
-      B = 10;
+      B = BC;
       }
-      B = 0;
       if(IVSC >= 2.23){
-      B = 10;
+      B = BC;
       }
-      B = 0;
       if(IVSL >= 2.23){
-      B = 10;
+      B = BC;
       }
-      B = 0;
       
 
     
