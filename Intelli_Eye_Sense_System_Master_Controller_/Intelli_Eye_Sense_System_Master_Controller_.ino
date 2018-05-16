@@ -12,7 +12,8 @@
  *  BCSP - 14
  *  BRSP - 15
  *  RSSP - 16
- */ 
+ *  AFC - 17 Auxilary Funcion Controller(Physical Interface Function Controller)
+*/
 // LOVC PID Values
 float Kp=0.1, Ki=0.5, Kd=0;
 int output_bits = 8;
@@ -94,9 +95,6 @@ pinMode(BPER, OUTPUT);
 D = Wire.read();
 
   // Begin initialization of Sensors and System Check
-if Serial.available(){
-  Serial.println(00x00); //Tell Display System Is Startup
-  }
   
   Wire.beginTransmission(9);  // transmit to device #2
   Wire.write(00000);          //Sends startup request and check
@@ -259,6 +257,7 @@ void loop() {
     CWS();
     CPS();
     SMO();
+    LCA();
 }
 
 
