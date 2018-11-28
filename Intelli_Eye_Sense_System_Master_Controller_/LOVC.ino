@@ -12,4 +12,3 @@ void LOVC(){ // Longitudinal Vehicle Control I.E. Acceleration and Breaking
   BR.Compute();
   B = Output;
   }
-

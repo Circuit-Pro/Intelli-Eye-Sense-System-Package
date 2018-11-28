@@ -8,5 +8,3 @@
  * D8 Speed Sensor
  * A0 Current Sensor
  */
-
-

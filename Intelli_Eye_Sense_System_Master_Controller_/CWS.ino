@@ -37,4 +37,3 @@ void CWS(){ // Collision Warning System
     digitalWrite(ERR, LOW);
     digitalWrite(BPER, LOW);
 }
-
